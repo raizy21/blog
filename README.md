@@ -50,3 +50,13 @@ this is a simple blog application that demonstrates full crud functionality. use
 
 - **dotenv**: loads environment variables from a `.env` file into `process.env`
 - **nodemon**: automatically restarts the server on file changes for faster development
+
+## resources
+
+- **html**: comprehensive guide and reference for the standard markup language – [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- **css**: tutorials and reference for styling and layout – [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- **javascript**: in-depth documentation and guides for the language – [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- **ejs**: official templating engine docs and examples – [ejs.co](https://ejs.co)
+- **mysql**: official documentation and tutorials for the relational database – [dev.mysql.com/doc/](https://dev.mysql.com/doc/)
+- **dotenv**: environment variable loader for node.js – [github.com/motdotla/dotenv](https://github.com/motdotla/dotenv)
+- **nodemon**: automatic server restart tool for development – [github.com/remy/nodemon](https://github.com/remy/nodemon)
