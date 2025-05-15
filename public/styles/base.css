@@ -70,7 +70,7 @@ ol {
   font: inherit;
   background-color: var(--accent-color);
   border: 1px solid var(--color-hover);
-  color: white;
+  color: var(--secondary-color);
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
 }
@@ -79,7 +79,7 @@ ol {
 .btn:active {
   background-color: var(--color-hover);
   border-color: var(--color-hover);
-  color: white;
+  color: var(--secondary-color);
 }
 
 .btn.btn-alt {
