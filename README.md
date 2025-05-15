@@ -19,6 +19,21 @@ this is a simple blog application that demonstrates full crud functionality. use
 - **update** existing posts through an edit interface
 - **delete** posts with a confirmation step
 
+## environment variables
+
+create a `.env` file in the project root based on the provided `.env.example`. this file contains your database and server configuration:
+
+```dotenv
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=your_username_here
+DB_PASSWORD=your_password_here
+DB_NAME=blog_name_here
+PORT=3000
+```
+
+make sure to add .env to your .gitignore so you don’t commit sensitive information to version control.
+
 ## database schema
 
 ### posts table
