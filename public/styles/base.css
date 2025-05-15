@@ -1,0 +1,129 @@
+/* common styles */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  outline: none;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+}
+
+/* variables color */
+:root {
+  --primary-color: #f8ee00;
+  --secondary-color: #2d3048;
+  --accent-color: #1995ad;
+  --background-color: #1e1f2b;
+  --text-color: #fcc707;
+  --color-fancy-blue: #3f418d;
+  --color-hover: #c1bb0f;
+  --error-color: #ff4d4d;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  color: var(--secondary-color);
+}
+body {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* end of common styles */
+
+main {
+  width: 80%;
+  margin: 3rem auto;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+a:hover,
+a:active {
+  color: var(--color-hover);
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* global components */
+
+.btn {
+  cursor: pointer;
+  font: inherit;
+  background-color: var(--accent-color);
+  border: 1px solid var(--color-hover);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--color-hover);
+  border-color: var(--color-hover);
+  color: white;
+}
+
+.btn.btn-alt {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--accent-color);
+}
+
+.btn.btn-alt:hover,
+.btn.btn-alt:active {
+  color: var(--color-hover);
+}
+
+/* site-wide content / elements */
+
+#main-header {
+  padding: 2rem 10%;
+  background-color: var(--accent-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#logo a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  font-family: "Ubuntu", sans-serif;
+}
+
+#main-header ul {
+  display: flex;
+}
+
+#main-header li {
+  margin-left: 2rem;
+}
+
+#main-header nav a {
+  color: var(--secondary-color);
+  font-size: 1.25rem;
+}
+
+#main-header nav a:hover,
+#main-header nav a:active {
+  color: var(--color-hover);
+}
