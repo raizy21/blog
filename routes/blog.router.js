@@ -34,4 +34,15 @@ router.get("/new-post", async (req, res) => {
   res.status(200).render("create-post", { authors: authors });
 });
 
+router.get("/posts/:id", async (req, res, next) => {
+  const query = `
+    SELECT posts.*, authors.name AS author_name, authors.email AS author_email
+    FROM posts
+    INNER JOIN authors ON posts.author_id = authors.id
+    WHERE posts.id = ?`;
+  const [posts] = await pool.query(query, [req.params.id]);
+
+  res.render("post-detail", { post: posts[0] });
+});
+
 export default router;
