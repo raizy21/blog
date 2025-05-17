@@ -17,11 +17,7 @@
       <% } else { %>
       <ol class="posts-list">
         <% for (const post of posts) { %>
-        <li>
-          <% include('includes/post-item', { post: post }) %>
-        </li>
-      
-      </li>
+        <li><%- include('includes/post-item', { post: post }) %></li>
         <% } %>
       </ol>
       <% } %>
