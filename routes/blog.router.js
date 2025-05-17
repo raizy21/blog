@@ -7,8 +7,12 @@ router.get("/", (req, res) => {
   res.status(200).redirect("/posts");
 });
 
-router.get("/posts", (req, res) => {
-  res.status(200).render("posts-list");
+router.get("/posts", async (req, res) => {
+  const query = `
+  SELECT posts.*, authors.name AS author_name 
+  FROM posts INNER JOIN authors ON posts.author_id = authors.id`;
+  const [posts] = await pool.query(query);
+  res.render("posts-list", { posts: posts });
 });
 
 router.post("/posts", async (req, res) => {
