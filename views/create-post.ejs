@@ -9,7 +9,7 @@
     <%- include('includes/header') %>
     <main>
       <h1>add a new post</h1>
-      <form action="..." method="...">
+      <form action="/posts" method="POST">
         <div class="form-control">
           <label for="title">title</label>
           <input type="text" id="title" name="title" required />
@@ -25,17 +25,23 @@
           />
         </div>
         <div class="form-control">
-          <label for="content">post content</label>
-          <textarea id="content" name="content" required rows="5"></textarea>
+          <label for="body">post content</label>
+          <textarea id="body" name="body" required rows="5"></textarea>
         </div>
+
         <div class="form-control">
           <label for="author">select author</label>
-          <select id="author" name="author">
-            ...
+          +
+          <select id="author" name="author_id">
+            <% for (let author of authors) { %>
+            <option value="<%= author.id %>"><%= author.name %></option>
+            <% } %>
           </select>
         </div>
         <button class="btn">add post</button>
       </form>
     </main>
+
+    <%- include('includes/footer') %>
   </body>
 </html>

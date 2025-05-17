@@ -1,4 +1,4 @@
-/* All posts page */
+/* all posts page */
 
 #all-posts {
   text-align: center;
@@ -37,7 +37,13 @@
   padding: 0;
 }
 
-/* Post detail page */
+.no-posts {
+  text-align: center;
+  color: var(--text-color);
+  margin: 5rem;
+}
+
+/* post detail page */
 
 #post-meta {
   color: var(--text-color);
