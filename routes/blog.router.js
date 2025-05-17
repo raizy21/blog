@@ -15,14 +15,18 @@ router.get("/posts", async (req, res) => {
   res.render("posts-list", { posts: posts });
 });
 
-router.post("/posts", async (req, res) => {
+router.post("/posts", async (req, res, next) => {
   const { title, summary, body, author_id } = req.body;
-  await pool.query(
-    "INSERT INTO posts (title, summary, body, author_id) VALUES (?)",
-    [title, summary, body, author_id]
-  );
 
-  res.status(201).redirect("/posts");
+  try {
+    await pool.query(
+      "INSERT INTO posts (title, summary, body, author_id) VALUES (?, ?, ?, ?)",
+      [title, summary, body, author_id]
+    );
+    res.status(201).redirect("/posts");
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.get("/new-post", async (req, res) => {
