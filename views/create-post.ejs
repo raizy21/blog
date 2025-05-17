@@ -31,7 +31,9 @@
         <div class="form-control">
           <label for="author">select author</label>
           <select id="author" name="author">
-            ...
+            <% for (let author of authors) { %>
+            <option value="<%= author.id %>"><%= author.name %></option>
+            <% } %>
           </select>
         </div>
         <button class="btn">add post</button>
