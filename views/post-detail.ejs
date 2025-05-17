@@ -10,8 +10,10 @@
     <main id="post-detail">
       <h1><%= post.title %></h1>
       <section id="post-meta">
-        <p class="post-author">by <%= post.author_name %></p>
-        <p class="post-date"><%= post.created_at %></p>
+        <address class="post-author">
+          <a href="mailto:<%= post.author_email %>"><%= post.author_name %></a>
+        </address>
+        | <time datetime="<%= post.date %>"><%= post.date %></time>
       </section>
       <hr />
       <section>
