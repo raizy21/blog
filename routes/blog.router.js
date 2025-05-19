@@ -74,4 +74,23 @@ router.get("/posts/:id/edit", async function (req, res) {
   res.render("update-post", { post: posts[0] });
 });
 
+router.post("/posts/:id/edit", async function (req, res, next) {
+  const postId = req.params.id; // read id from URL
+  const { title, summary, body } = req.body; // now matches the form
+
+  const query = `
+    update posts
+       set title   = ?,
+           summary = ?,
+           body    = ?
+     where id      = ?
+  `;
+  try {
+    await pool.query(query, [title, summary, body, postId]);
+    res.redirect("/posts");
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
