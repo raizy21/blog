@@ -7,6 +7,7 @@ import {
   newPostForm,
   showPost,
   editPostForm,
+  updatePostHandler,
 } from "../controllers/post.controller.js";
 
 const router = express.Router();
@@ -31,24 +32,8 @@ router.get("/posts/:id", showPost);
 // GET /posts/:id/edit
 router.get("/posts/:id/edit", editPostForm);
 
-router.post("/posts/:id/edit", async function (req, res, next) {
-  const postId = req.params.id; // read id from URL
-  const { title, summary, body } = req.body; // now matches the form
-
-  const query = `
-    update posts
-       set title   = ?,
-           summary = ?,
-           body    = ?
-     where id      = ?
-  `;
-  try {
-    await pool.query(query, [title, summary, body, postId]);
-    res.redirect("/posts");
-  } catch (err) {
-    next(err);
-  }
-});
+// POST /posts/:id/edit
+router.post("/posts/:id/edit", updatePostHandler);
 
 router.post("/posts/:id/delete", async function (req, res, next) {
   const postId = req.params.id;

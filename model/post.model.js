@@ -56,3 +56,15 @@ export async function fetchPostByIdEdit(id) {
   const [data] = await pool.query(sql, [id]);
   return data[0] ?? null;
 }
+
+// update a post by ID
+export async function updatePost(id, { title, summary, body }) {
+  const sql = `
+    update posts
+       set title   = ?,
+           summary = ?,
+           body    = ?
+     where id      = ?
+  `;
+  await pool.query(sql, [title, summary, body, id]);
+}

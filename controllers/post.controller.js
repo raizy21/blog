@@ -4,6 +4,7 @@ import {
   newPost,
   fetchPostById,
   fetchPostByIdEdit,
+  updatePost,
 } from "../model/post.model.js";
 
 // GET /posts
@@ -57,6 +58,16 @@ export async function editPostForm(req, res, next) {
     const post = await fetchPostByIdEdit(req.params.id);
     if (!post) return res.status(404).render("404");
     res.render("update-post", { post });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// POST /posts/:id/edit
+export async function updatePostHandler(req, res, next) {
+  try {
+    await updatePost(req.params.id, req.body);
+    res.redirect("/posts");
   } catch (err) {
     next(err);
   }
