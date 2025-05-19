@@ -1,7 +1,11 @@
 import express from "express";
 import { pool } from "../util/database.js";
 
-import { listPosts, createPost } from "../controllers/post.controller.js";
+import {
+  listPosts,
+  createPost,
+  newPostForm,
+} from "../controllers/post.controller.js";
 
 const router = express.Router();
 
@@ -16,10 +20,8 @@ router.get("/posts", listPosts);
 // POST /posts
 router.post("/posts", createPost);
 
-router.get("/new-post", async (req, res) => {
-  const [authors] = await pool.query("SELECT * FROM authors");
-  res.status(200).render("create-post", { authors: authors });
-});
+// GET /new-post
+router.get("/new-post", newPostForm);
 
 router.get("/posts/:id", async (req, res, next) => {
   const query = `
