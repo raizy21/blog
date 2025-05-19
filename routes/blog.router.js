@@ -1,5 +1,4 @@
 import express from "express";
-import { pool } from "../util/database.js";
 
 import {
   listPosts,
@@ -8,6 +7,7 @@ import {
   showPost,
   editPostForm,
   updatePostHandler,
+  deletePostHandler,
 } from "../controllers/post.controller.js";
 
 const router = express.Router();
@@ -35,17 +35,10 @@ router.get("/posts/:id/edit", editPostForm);
 // POST /posts/:id/edit
 router.post("/posts/:id/edit", updatePostHandler);
 
-router.post("/posts/:id/delete", async function (req, res, next) {
-  const postId = req.params.id;
+// POST /posts/:id/delete
+router.post("/posts/:id/delete", deletePostHandler);
 
-  try {
-    await pool.query("DELETE FROM posts WHERE id = ?", [postId]);
-    res.redirect("/posts");
-  } catch (err) {
-    next(err);
-  }
-});
-
+// testing the errorpage
 router.get("/fail", (req, res) => {
   throw new Error("test 500 page");
 });

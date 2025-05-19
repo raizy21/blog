@@ -68,3 +68,9 @@ export async function updatePost(id, { title, summary, body }) {
   `;
   await pool.query(sql, [title, summary, body, id]);
 }
+
+// delete a post by ID
+export async function deletePost(id) {
+  const sql = `DELETE FROM posts WHERE id = ?`;
+  await pool.query(sql, [id]);
+}

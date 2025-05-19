@@ -5,6 +5,7 @@ import {
   fetchPostById,
   fetchPostByIdEdit,
   updatePost,
+  deletePost,
 } from "../model/post.model.js";
 
 // GET /posts
@@ -67,6 +68,18 @@ export async function editPostForm(req, res, next) {
 export async function updatePostHandler(req, res, next) {
   try {
     await updatePost(req.params.id, req.body);
+    res.redirect("/posts");
+  } catch (err) {
+    next(err);
+  }
+}
+
+// POST /posts/:id/delete
+export async function deletePostHandler(req, res, next) {
+  const postId = req.params.id;
+
+  try {
+    await deletePost(postId);
     res.redirect("/posts");
   } catch (err) {
     next(err);
