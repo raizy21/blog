@@ -93,4 +93,15 @@ router.post("/posts/:id/edit", async function (req, res, next) {
   }
 });
 
+router.post("/posts/:id/delete", async function (req, res, next) {
+  const postId = req.params.id;
+
+  try {
+    await pool.query("DELETE FROM posts WHERE id = ?", [postId]);
+    res.redirect("/posts");
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
