@@ -46,3 +46,13 @@ export async function fetchPostById(id) {
   };
   return postData ?? null;
 }
+
+// get posts for the edit form
+export async function fetchPostByIdEdit(id) {
+  const sql = `
+    SELECT *  
+    FROM posts 
+    WHERE posts.id = ?`;
+  const [data] = await pool.query(sql, [id]);
+  return data[0] ?? null;
+}

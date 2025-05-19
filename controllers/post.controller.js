@@ -3,6 +3,7 @@ import {
   insertPost,
   newPost,
   fetchPostById,
+  fetchPostByIdEdit,
 } from "../model/post.model.js";
 
 // GET /posts
@@ -45,6 +46,17 @@ export async function showPost(req, res, next) {
     const post = await fetchPostById(req.params.id);
     if (!post) return res.status(404).render("404");
     res.render("post-detail", { post });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// GET /posts/:id/edit
+export async function editPostForm(req, res, next) {
+  try {
+    const post = await fetchPostByIdEdit(req.params.id);
+    if (!post) return res.status(404).render("404");
+    res.render("update-post", { post });
   } catch (err) {
     next(err);
   }

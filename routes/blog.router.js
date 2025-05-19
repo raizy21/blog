@@ -6,6 +6,7 @@ import {
   createPost,
   newPostForm,
   showPost,
+  editPostForm,
 } from "../controllers/post.controller.js";
 
 const router = express.Router();
@@ -27,19 +28,8 @@ router.get("/new-post", newPostForm);
 // GET /posts/:id
 router.get("/posts/:id", showPost);
 
-router.get("/posts/:id/edit", async function (req, res) {
-  const query = `
-    SELECT *  
-    FROM posts 
-    WHERE posts.id = ?`;
-  const [posts] = await pool.query(query, [req.params.id]);
-
-  if (!posts || posts.length === 0) {
-    return res.status(404).render("404");
-  }
-
-  res.render("update-post", { post: posts[0] });
-});
+// GET /posts/:id/edit
+router.get("/posts/:id/edit", editPostForm);
 
 router.post("/posts/:id/edit", async function (req, res, next) {
   const postId = req.params.id; // read id from URL
