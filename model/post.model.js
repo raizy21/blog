@@ -8,3 +8,9 @@ export async function fetchAllPosts() {
   const [data] = await pool.query(sql);
   return data;
 }
+
+export async function insertPost({ title, summary, body, author_id }) {
+  const sql = `INSERT INTO posts (title, summary, body, author_id) VALUES (?, ?, ?, ?)`;
+
+  const [data] = await pool.query(sql, [title, summary, body, author_id]);
+}

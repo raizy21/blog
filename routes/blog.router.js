@@ -1,7 +1,7 @@
 import express from "express";
 import { pool } from "../util/database.js";
 
-import { listPosts } from "../controllers/post.controller.js";
+import { listPosts, createPost } from "../controllers/post.controller.js";
 
 const router = express.Router();
 
@@ -13,19 +13,8 @@ router.get("/", (req, res) => {
 // GET /posts
 router.get("/posts", listPosts);
 
-router.post("/posts", async (req, res, next) => {
-  const { title, summary, body, author_id } = req.body;
-
-  try {
-    await pool.query(
-      "INSERT INTO posts (title, summary, body, author_id) VALUES (?, ?, ?, ?)",
-      [title, summary, body, author_id]
-    );
-    res.status(201).redirect("/posts");
-  } catch (err) {
-    next(err);
-  }
-});
+// POST /posts
+router.post("/posts", createPost);
 
 router.get("/new-post", async (req, res) => {
   const [authors] = await pool.query("SELECT * FROM authors");
