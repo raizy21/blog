@@ -1,4 +1,9 @@
-import { fetchAllPosts, insertPost, newPost } from "../model/post.model.js";
+import {
+  fetchAllPosts,
+  insertPost,
+  newPost,
+  fetchPostById,
+} from "../model/post.model.js";
 
 // GET /posts
 export async function listPosts(req, res, next) {
@@ -29,6 +34,17 @@ export async function newPostForm(req, res, next) {
   try {
     const authors = await newPost();
     res.render("create-post", { authors });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// GET /posts/:id
+export async function showPost(req, res, next) {
+  try {
+    const post = await fetchPostById(req.params.id);
+    if (!post) return res.status(404).render("404");
+    res.render("post-detail", { post });
   } catch (err) {
     next(err);
   }

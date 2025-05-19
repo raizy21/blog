@@ -5,6 +5,7 @@ import {
   listPosts,
   createPost,
   newPostForm,
+  showPost,
 } from "../controllers/post.controller.js";
 
 const router = express.Router();
@@ -23,31 +24,8 @@ router.post("/posts", createPost);
 // GET /new-post
 router.get("/new-post", newPostForm);
 
-router.get("/posts/:id", async (req, res, next) => {
-  const query = `
-    SELECT posts.*, authors.name AS author_name, authors.email AS author_email
-    FROM posts
-    INNER JOIN authors ON posts.author_id = authors.id
-    WHERE posts.id = ?`;
-  const [posts] = await pool.query(query, [req.params.id]);
-
-  if (!posts || posts.length === 0) {
-    return res.status(404).render("404");
-  }
-
-  const postData = {
-    ...posts[0],
-    date: posts[0].date.toISOString(),
-    humanReadableDate: posts[0].date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }),
-  };
-
-  res.render("post-detail", { post: postData });
-});
+// GET /posts/:id
+router.get("/posts/:id", showPost);
 
 router.get("/posts/:id/edit", async function (req, res) {
   const query = `

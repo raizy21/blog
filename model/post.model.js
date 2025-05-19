@@ -24,3 +24,25 @@ export async function newPost() {
 
   return data;
 }
+
+// get a post by ID with author details
+export async function fetchPostById(id) {
+  const sql = `
+      SELECT posts.*, authors.name AS author_name, authors.email AS author_email
+      FROM posts
+      INNER JOIN authors ON posts.author_id = authors.id
+      WHERE posts.id = ?`;
+  const [data] = await pool.query(sql, [id]);
+
+  const postData = {
+    ...data[0],
+    date: data[0].date.toISOString(),
+    humanReadableDate: data[0].date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+  };
+  return postData ?? null;
+}
