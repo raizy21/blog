@@ -34,6 +34,76 @@ PORT=3000
 
 make sure to add .env to your .gitignore so you don’t commit sensitive information to version control.
 
+## api
+
+### get /posts
+
+fetch a list of all blog posts  
+**response:**
+
+- `200 ok` with json array of posts
+
+### get /new-post
+
+render the form for creating a new post  
+**response:**
+
+- `200 ok` with html form
+
+### get /posts/:id
+
+fetch a single post by id  
+**path params:**
+
+- `id` (int) – post id  
+  **response:**
+- `200 ok` with json object of the post
+- `404 not found` if no post matches
+
+### get /posts/:id/edit
+
+render the form for editing a post  
+**path params:**
+
+- `id` (int) – post id  
+  **response:**
+- `200 ok` with html form prefilled
+- `404 not found` if no post matches
+
+### post /posts
+
+create a new post  
+**body params (json or urlencoded):**
+
+- `title` (string)
+- `summary` (string)
+- `body` (string)
+- `author_id` (int)  
+  **response:**
+- `201 created` and redirects to `/posts`
+
+### post /posts/:id/edit
+
+update an existing post  
+**path params:**
+
+- `id` (int) – post id  
+  **body params (json or urlencoded):**
+- `title` (string)
+- `summary` (string)
+- `body` (string)  
+  **response:**
+- `200 ok` and redirects to `/posts`
+
+### post /posts/:id/delete
+
+delete a post  
+**path params:**
+
+- `id` (int) – post id  
+  **response:**
+- `200 ok` and redirects to `/posts`
+
 ## database schema
 
 ### posts table

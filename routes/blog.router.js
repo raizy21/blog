@@ -1,52 +1,46 @@
 import express from "express";
-import { pool } from "../util/database.js";
+
+import {
+  listPosts,
+  createPost,
+  newPostForm,
+  showPost,
+  editPostForm,
+  updatePostHandler,
+  deletePostHandler,
+} from "../controllers/post.controller.js";
 
 const router = express.Router();
 
+// redirect root URL to /posts
 router.get("/", (req, res) => {
   res.status(200).redirect("/posts");
 });
 
-router.get("/posts", async (req, res) => {
-  const query = `
-  SELECT posts.*, authors.name AS author_name 
-  FROM posts INNER JOIN authors ON posts.author_id = authors.id`;
-  const [posts] = await pool.query(query);
-  res.render("posts-list", { posts: posts });
-});
+// GET /posts
+router.get("/posts", listPosts);
 
-router.post("/posts", async (req, res, next) => {
-  const { title, summary, body, author_id } = req.body;
+// POST /posts
+router.post("/posts", createPost);
 
-  try {
-    await pool.query(
-      "INSERT INTO posts (title, summary, body, author_id) VALUES (?, ?, ?, ?)",
-      [title, summary, body, author_id]
-    );
-    res.status(201).redirect("/posts");
-  } catch (err) {
-    next(err);
-  }
-});
+// GET /new-post
+router.get("/new-post", newPostForm);
 
-router.get("/new-post", async (req, res) => {
-  const [authors] = await pool.query("SELECT * FROM authors");
-  res.status(200).render("create-post", { authors: authors });
-});
+// GET /posts/:id
+router.get("/posts/:id", showPost);
 
-router.get("/posts/:id", async (req, res, next) => {
-  const query = `
-    SELECT posts.*, authors.name AS author_name, authors.email AS author_email
-    FROM posts
-    INNER JOIN authors ON posts.author_id = authors.id
-    WHERE posts.id = ?`;
-  const [posts] = await pool.query(query, [req.params.id]);
+// GET /posts/:id/edit
+router.get("/posts/:id/edit", editPostForm);
 
-  if (!posts || posts.length === 0) {
-    return res.status(404).render("404");
-  }
+// POST /posts/:id/edit
+router.post("/posts/:id/edit", updatePostHandler);
 
-  res.render("post-detail", { post: posts[0] });
+// POST /posts/:id/delete
+router.post("/posts/:id/delete", deletePostHandler);
+
+// testing the errorpage
+router.get("/fail", (req, res) => {
+  throw new Error("test 500 page");
 });
 
 export default router;
