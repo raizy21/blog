@@ -29,6 +29,10 @@ app.use(express.static("public")); // serve static files (e.g. CSS files)
 
 app.use(blogRouter); // use the blog router for all routes starting with /blog
 
+app.use((error, req, res, next) => {
+  console.error(error);
+  res.status(500).render("500");
+});
 const startServer = async () => {
   try {
     await connectDB();

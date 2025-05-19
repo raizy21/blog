@@ -127,3 +127,16 @@ ol {
 #main-header nav a:active {
   color: var(--color-hover);
 }
+
+.error-page {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.error-page h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.error-page p {
+  margin-bottom: 2rem;
+  color: #666;
+}

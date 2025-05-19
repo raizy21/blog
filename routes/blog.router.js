@@ -104,4 +104,8 @@ router.post("/posts/:id/delete", async function (req, res, next) {
   }
 });
 
+router.get("/fail", (req, res) => {
+  throw new Error("test 500 page");
+});
+
 export default router;
