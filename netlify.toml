@@ -2,8 +2,13 @@
   functions = "netlify/functions"
   publish   = "public"
 
-[functions]
-  external_node_modules = ["express"]
+[dev]
+  framework  = "#custom"
+  command    = "npm start"
+  port       = 8888
+  targetPort = 3000
+  publish    = "public"
+  functions  = "netlify/functions"
 
 [[redirects]]
   from   = "/(.*)"

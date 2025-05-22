@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "dev": "netlify dev",
-    "prod": " netlify deploy --prod "
+    "prod": "netlify deploy --prod"
   },
   "keywords": [],
   "author": "andrei",
