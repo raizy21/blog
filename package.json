@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "andrei",
@@ -13,7 +14,8 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mysql2": "^3.14.1"
+    "mysql2": "^3.14.1",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "dotenv": "^16.5.0",
